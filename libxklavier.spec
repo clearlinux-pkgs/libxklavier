@@ -4,7 +4,7 @@
 #
 Name     : libxklavier
 Version  : 5.0
-Release  : 1
+Release  : 2
 URL      : https://downloads.sourceforge.net/project/gswitchit/libxklavier/5.0/libxklavier-5.0.tar.bz2
 Source0  : https://downloads.sourceforge.net/project/gswitchit/libxklavier/5.0/libxklavier-5.0.tar.bz2
 Summary  : Libraries, includes, etc to develop libxklavier applications
