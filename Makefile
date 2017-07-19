@@ -1,5 +1,5 @@
 PKG_NAME := libxklavier
-URL := https://downloads.sourceforge.net/project/gswitchit/libxklavier/5.0/libxklavier-5.0.tar.bz2
-ARCHIVES :=
+URL := http://pkgs.fedoraproject.org/repo/pkgs/libxklavier/libxklavier-5.4.tar.bz2/13af74dcb6011ecedf1e3ed122bd31fa/libxklavier-5.4.tar.bz2
+
 
 include ../common/Makefile.common

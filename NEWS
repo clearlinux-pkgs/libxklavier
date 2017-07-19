@@ -1,3 +1,16 @@
+5.4	A couple of introspection fixes
+5.3	A number of introspection and build fixes
+5.2.1	Fixed GIR params for introspection (broken build)
+5.2	Optional introspection introduced
+	Some minor fixes (runtime and build-time)
+5.1	Expanding APIs for GNOME 3 needs (bumped soname):
+	- converting ISO codes to translatable names (it was private, now public)
+	- search by pattern
+	Using to X11 API throgh pkg-config
+	One race condition eliminated
+	XInput2 version checking: looking for support of DevicePresence 
+5.0	Ability to have different types of listeners in the same process
+	(necessary for the latest unstable version of GNOME).
 4.0	Support for "extras" in xkeyboard-config, small bugfixes and build
 	fixes
 3.8	Added "new device" signal - for plugged keyboard (no need in the 
