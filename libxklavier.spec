@@ -4,20 +4,20 @@
 #
 Name     : libxklavier
 Version  : 5.4
-Release  : 3
-URL      : http://pkgs.fedoraproject.org/repo/pkgs/libxklavier/libxklavier-5.4.tar.bz2/13af74dcb6011ecedf1e3ed122bd31fa/libxklavier-5.4.tar.bz2
-Source0  : http://pkgs.fedoraproject.org/repo/pkgs/libxklavier/libxklavier-5.4.tar.bz2/13af74dcb6011ecedf1e3ed122bd31fa/libxklavier-5.4.tar.bz2
-Summary  : Libraries, includes, etc to develop libxklavier applications
+Release  : 4
+URL      : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
+Source0  : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
+Summary  : libxklavier library
 Group    : Development/Tools
 License  : LGPL-2.0
 Requires: libxklavier-lib
-Requires: libxklavier-doc
 Requires: libxklavier-data
 BuildRequires : docbook-xml
 BuildRequires : glib-dev
 BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
+BuildRequires : intltool
 BuildRequires : libxkbfile-dev
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-bin
@@ -32,7 +32,8 @@ BuildRequires : pkgconfig(xorg-server)
 BuildRequires : xkbcomp-bin
 
 %description
-This library allows you simplify XKB-related development.
+libxklavier - utility library to make XKB stuff easier
+Sergey V. Udaltsov
 
 %package data
 Summary: data components for the libxklavier package.
@@ -53,14 +54,6 @@ Provides: libxklavier-devel
 dev components for the libxklavier package.
 
 
-%package doc
-Summary: doc components for the libxklavier package.
-Group: Documentation
-
-%description doc
-doc components for the libxklavier package.
-
-
 %package lib
 Summary: lib components for the libxklavier package.
 Group: Libraries
@@ -71,15 +64,15 @@ lib components for the libxklavier package.
 
 
 %prep
-%setup -q -n libxklavier-5.4
+%setup -q -n libxklavier-libxklavier-5.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1500495081
-%configure --disable-static
+export SOURCE_DATE_EPOCH=1500570296
+%autogen --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
@@ -90,7 +83,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1500495081
+export SOURCE_DATE_EPOCH=1500570296
 rm -rf %{buildroot}
 %make_install
 
@@ -113,24 +106,6 @@ rm -rf %{buildroot}
 /usr/include/libxklavier/xklavier.h
 /usr/lib64/libxklavier.so
 /usr/lib64/pkgconfig/libxklavier.pc
-
-%files doc
-%defattr(-,root,root,-)
-/usr/share/gtk-doc/html/libxklavier/XklConfigItem.html
-/usr/share/gtk-doc/html/libxklavier/XklConfigRec.html
-/usr/share/gtk-doc/html/libxklavier/XklConfigRegistry.html
-/usr/share/gtk-doc/html/libxklavier/ch01.html
-/usr/share/gtk-doc/html/libxklavier/ch02.html
-/usr/share/gtk-doc/html/libxklavier/home.png
-/usr/share/gtk-doc/html/libxklavier/index.html
-/usr/share/gtk-doc/html/libxklavier/index.sgml
-/usr/share/gtk-doc/html/libxklavier/left.png
-/usr/share/gtk-doc/html/libxklavier/libxklavier-xkl-engine.html
-/usr/share/gtk-doc/html/libxklavier/libxklavier-xklavier.html
-/usr/share/gtk-doc/html/libxklavier/libxklavier.devhelp2
-/usr/share/gtk-doc/html/libxklavier/right.png
-/usr/share/gtk-doc/html/libxklavier/style.css
-/usr/share/gtk-doc/html/libxklavier/up.png
 
 %files lib
 %defattr(-,root,root,-)

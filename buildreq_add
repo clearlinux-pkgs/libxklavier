@@ -4,3 +4,4 @@ libxml2-dev
 glib-dev
 xkbcomp-bin
 libxkbfile-dev
+intltool
