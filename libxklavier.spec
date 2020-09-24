@@ -4,7 +4,7 @@
 #
 Name     : libxklavier
 Version  : 5.4
-Release  : 7
+Release  : 8
 URL      : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
 Source0  : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
 Summary  : libxklavier library
