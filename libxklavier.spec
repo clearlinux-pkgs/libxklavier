@@ -4,14 +4,15 @@
 #
 Name     : libxklavier
 Version  : 5.4
-Release  : 8
+Release  : 9
 URL      : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
 Source0  : https://github.com/freedesktop/libxklavier/archive/libxklavier-5.4.tar.gz
 Summary  : libxklavier library
 Group    : Development/Tools
 License  : LGPL-2.0
-Requires: libxklavier-lib
-Requires: libxklavier-data
+Requires: libxklavier-data = %{version}-%{release}
+Requires: libxklavier-lib = %{version}-%{release}
+Requires: libxklavier-license = %{version}-%{release}
 BuildRequires : docbook-xml
 BuildRequires : glib-dev
 BuildRequires : gobject-introspection-dev
@@ -29,6 +30,7 @@ BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xi)
 BuildRequires : pkgconfig(xorg-server)
+BuildRequires : vala
 BuildRequires : xkbcomp-bin
 
 %description
@@ -46,9 +48,10 @@ data components for the libxklavier package.
 %package dev
 Summary: dev components for the libxklavier package.
 Group: Development
-Requires: libxklavier-lib
-Requires: libxklavier-data
-Provides: libxklavier-devel
+Requires: libxklavier-lib = %{version}-%{release}
+Requires: libxklavier-data = %{version}-%{release}
+Provides: libxklavier-devel = %{version}-%{release}
+Requires: libxklavier = %{version}-%{release}
 
 %description dev
 dev components for the libxklavier package.
@@ -57,34 +60,54 @@ dev components for the libxklavier package.
 %package lib
 Summary: lib components for the libxklavier package.
 Group: Libraries
-Requires: libxklavier-data
+Requires: libxklavier-data = %{version}-%{release}
+Requires: libxklavier-license = %{version}-%{release}
 
 %description lib
 lib components for the libxklavier package.
 
 
+%package license
+Summary: license components for the libxklavier package.
+Group: Default
+
+%description license
+license components for the libxklavier package.
+
+
 %prep
 %setup -q -n libxklavier-libxklavier-5.4
+cd %{_builddir}/libxklavier-libxklavier-5.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1500570296
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604609933
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %autogen --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1500570296
+export SOURCE_DATE_EPOCH=1604609933
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libxklavier
+cp %{_builddir}/libxklavier-libxklavier-5.4/COPYING.LIB %{buildroot}/usr/share/package-licenses/libxklavier/b256632dcce76559734ff0a23330d2898b7d3a3b
 %make_install
 
 %files
@@ -111,3 +134,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/libxklavier.so.16
 /usr/lib64/libxklavier.so.16.4.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libxklavier/b256632dcce76559734ff0a23330d2898b7d3a3b
